@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: redirect-service
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: FALLBACK_URL
+        value: https://tu-app.com  # Cambia esto por la URL de tu app
