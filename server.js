@@ -36,24 +36,137 @@ app.get('/', (req, res) => {
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Redirect Service</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fitbeat — Redirect Service</title>
   <style>
-    body { font-family: sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
-    h1 { border-bottom: 2px solid #333; padding-bottom: 8px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    th, td { text-align: left; padding: 10px 14px; border: 1px solid #ddd; }
-    th { background: #f5f5f5; }
-    a { color: #0070f3; }
-    code { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #111;
+      border-bottom: 1px solid #222;
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    header .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #1DB954;
+      letter-spacing: -0.5px;
+    }
+    header .badge {
+      font-size: 0.7rem;
+      background: #1DB954;
+      color: #000;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    header .subtitle {
+      font-size: 0.78rem;
+      color: #666;
+      margin-left: auto;
+    }
+    main {
+      flex: 1;
+      max-width: 860px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+    h1 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .desc {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 24px;
+    }
+    .desc code {
+      background: #1e1e1e;
+      color: #1DB954;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 0.82em;
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    thead tr { border-bottom: 1px solid #2a2a2a; }
+    th {
+      text-align: left;
+      padding: 10px 16px;
+      color: #555;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    td {
+      padding: 11px 16px;
+      border-bottom: 1px solid #1a1a1a;
+      color: #ccc;
+    }
+    tbody tr:hover td { background: #111; }
+    a { color: #1DB954; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    footer {
+      text-align: center;
+      padding: 24px 16px;
+      font-size: 0.78rem;
+      color: #444;
+      border-top: 1px solid #161616;
+      line-height: 1.8;
+    }
+    footer a { color: #666; }
+    footer a:hover { color: #1DB954; }
+    .spotify-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.75rem;
+      color: #1DB954;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
-  <h1>Redirect Service</h1>
-  <p>Edita <code>redirects.json</code> para agregar o modificar redirecciones.</p>
-  <table>
-    <thead><tr><th>Ruta (desde)</th><th>Destino (hacia)</th></tr></thead>
-    <tbody>${rows}</tbody>
-  </table>
+  <header>
+    <span class="logo">Fitbeat</span>
+    <span class="badge">Beta</span>
+    <span class="subtitle">Proyecto académico · Universidad Nacional de Colombia</span>
+  </header>
+  <main>
+    <h1>Redirect Service</h1>
+    <p class="desc">Edita <code>redirects.json</code> para agregar o modificar redirecciones.</p>
+    <table>
+      <thead><tr><th>Ruta (desde)</th><th>Destino (hacia)</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  </main>
+  <footer>
+    <div>Data provided by <a href="https://getsongbpm.com" target="_blank" rel="noopener">GetSongBPM</a></div>
+    <div>
+      <span class="spotify-badge">&#9654; Powered by Spotify</span>
+    </div>
+    <div>Fitbeat es un proyecto académico en desarrollo · <a href="https://unal.edu.co" target="_blank" rel="noopener">Universidad Nacional de Colombia</a></div>
+  </footer>
 </body>
 </html>`);
 });
@@ -74,14 +187,85 @@ app.use((req, res) => {
 
   res.status(404).send(`<!DOCTYPE html>
 <html lang="es">
-<head><meta charset="UTF-8"><title>404 - No encontrado</title>
-<style>body{font-family:sans-serif;max-width:600px;margin:80px auto;text-align:center} a{display:inline-block;margin:8px 12px;color:#0070f3;}</style>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Fitbeat</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #111;
+      border-bottom: 1px solid #222;
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    header .logo { font-size: 1.6rem; font-weight: 700; color: #1DB954; letter-spacing: -0.5px; }
+    header .badge {
+      font-size: 0.7rem; background: #1DB954; color: #000;
+      font-weight: 600; padding: 2px 8px; border-radius: 999px;
+      letter-spacing: 0.5px; text-transform: uppercase;
+    }
+    header .subtitle { font-size: 0.78rem; color: #666; margin-left: auto; }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px;
+      gap: 12px;
+    }
+    .code { font-size: 4rem; font-weight: 800; color: #1DB954; line-height: 1; }
+    h2 { font-size: 1.2rem; color: #ccc; font-weight: 500; }
+    .path { font-size: 0.85rem; color: #555; font-family: monospace; margin-top: 4px; }
+    .links { display: flex; gap: 16px; margin-top: 20px; flex-wrap: wrap; justify-content: center; }
+    a {
+      color: #1DB954; text-decoration: none;
+      border: 1px solid #1DB954; padding: 8px 20px;
+      border-radius: 6px; font-size: 0.85rem; transition: background 0.15s;
+    }
+    a:hover { background: #1DB954; color: #000; }
+    footer {
+      text-align: center; padding: 24px 16px;
+      font-size: 0.78rem; color: #444;
+      border-top: 1px solid #161616; line-height: 1.8;
+    }
+    footer a { color: #666; }
+    footer a:hover { color: #1DB954; }
+    .spotify-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 0.75rem; color: #1DB954; font-weight: 600; }
+  </style>
 </head>
 <body>
-  <h2>404 - Redirección no encontrada</h2>
-  <p>La ruta <strong>${req.path}</strong> no está configurada.</p>
-  ${fallbackLink}
-  <a href="/">Ver redirecciones activas</a>
+  <header>
+    <span class="logo">Fitbeat</span>
+    <span class="badge">Beta</span>
+    <span class="subtitle">Proyecto académico · Universidad Nacional de Colombia</span>
+  </header>
+  <main>
+    <div class="code">404</div>
+    <h2>Redirección no encontrada</h2>
+    <p class="path">${req.path}</p>
+    <div class="links">
+      ${fallbackLink}
+      <a href="/">Ver redirecciones activas</a>
+    </div>
+  </main>
+  <footer>
+    <div>Data provided by <a href="https://getsongbpm.com" target="_blank" rel="noopener">GetSongBPM</a></div>
+    <div><span class="spotify-badge">&#9654; Powered by Spotify</span></div>
+    <div>Fitbeat es un proyecto académico en desarrollo · <a href="https://unal.edu.co" target="_blank" rel="noopener">Universidad Nacional de Colombia</a></div>
+  </footer>
 </body>
 </html>`);
 });
