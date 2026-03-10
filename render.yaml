@@ -7,3 +7,9 @@ services:
     envVars:
       - key: FALLBACK_URL
         value: https://tu-app.com  # Cambia esto por la URL de tu app
+      - key: SPOTIFY_CLIENT_ID
+        sync: false  # Configura en el dashboard de Render
+      - key: SPOTIFY_CLIENT_SECRET
+        sync: false  # Configura en el dashboard de Render
+      - key: SPOTIFY_REDIRECT_URI
+        value: https://callback-fitbeat.onrender.com/auth/callback
