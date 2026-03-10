@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fitbeat — Player</title>
+  <script src="https://sdk.scdn.co/spotify-player.js"></script>
+  <link rel="stylesheet" href="/player.css" />
+</head>
+<body>
+  <header>
+    <a href="/" class="logo">Fitbeat</a>
+    <span class="badge">Beta</span>
+    <span class="subtitle">Web Player</span>
+    <nav>
+      <a href="/">Redirects</a>
+      <a href="/auth/logout">Cerrar sesión</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="player-card">
+      <div class="art-wrap">
+        <img id="album-art" alt="Portada del álbum" />
+        <div id="art-placeholder">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="#fff">
+            <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/>
+          </svg>
+        </div>
+      </div>
+
+      <div id="track-name">Nada en reproducción</div>
+      <div id="artist-name">—</div>
+
+      <div class="progress-wrap">
+        <div class="progress-bar" id="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="time-row">
+          <span id="time-current">0:00</span>
+          <span id="time-total">0:00</span>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="ctrl" id="btn-prev" title="Anterior" aria-label="Pista anterior">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/>
+          </svg>
+        </button>
+        <button class="ctrl primary" id="btn-play-pause" title="Reproducir / Pausar" aria-label="Reproducir o pausar">
+          <svg id="icon-play" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+          <svg id="icon-pause" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+          </svg>
+        </button>
+        <button class="ctrl" id="btn-next" title="Siguiente" aria-label="Siguiente pista">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6 18l8.5-6L6 6v12zM16 6h2v12h-2z"/>
+          </svg>
+        </button>
+      </div>
+
+      <p id="status-msg"><span class="dot"></span>Conectando con Spotify…</p>
+    </div>
+  </main>
+
+  <footer>
+    &#9654; Powered by Spotify &nbsp;&middot;&nbsp;
+    Fitbeat &middot; <a href="https://unal.edu.co" target="_blank" rel="noopener">Universidad Nacional de Colombia</a>
+  </footer>
+
+  <script src="/player.js"></script>
+</body>
+</html>
